@@ -2,19 +2,6 @@ require "test_helper"
 
 describe Customer do
 
-  # at least one positive and one negative test case for each relation, validation, and custom function
-
-  describe "relations" do
-
-    it "must respond to movies" do
-      customers = Customer.all
-
-      customers.each do |customer|
-        customer.must_respond_to :movies
-      end
-    end
-
-  end
 
   describe "validations" do
 
