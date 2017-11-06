@@ -29,4 +29,41 @@ describe MoviesController do
       end
     end
   end
+
+  describe "show" do
+    it "returns a hash of information for one movie" do
+      get movie_path(movies(:jaws).id)
+      must_respond_with :success
+
+      body = JSON.parse(response.body)
+      body.must_be_kind_of Hash
+      body["title"].must_equal movies(:jaws).title
+    end
+
+    it "returns not_found when movie doesn't exist" do
+      get movie_path(Movie.last.id + 1)
+      must_respond_with :not_found
+
+      body = JSON.parse(response.body)
+      body.must_equal "not found" => true
+    end
+  end
+
+  describe "create" do
+    let(:movie_data) {
+      {
+        title: "Pirates of the Caribbean",
+        overview: "great movie with pirates",
+        release_date: "2001-05-09",
+        inventory: 3
+      }
+    }
+
+    it "creates a movie" do
+      proc {
+        post movies_path, params: {movie: movie_data}
+      }.must_change 'Movie.count', 1
+      must_respond_with :success
+    end
+  end
 end
