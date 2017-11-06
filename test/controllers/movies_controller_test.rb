@@ -65,5 +65,16 @@ describe MoviesController do
       }.must_change 'Movie.count', 1
       must_respond_with :success
     end
+
+    it "responds with bad_request if invalid data" do
+      movie_data[:inventory] = nil
+      proc {
+        post movies_path, params: {movie: movie_data}
+      }.wont_change 'Movie.count'
+      must_respond_with :bad_request
+
+      body = JSON.parse(response.body)
+      body.must_equal "errors" => {"inventory" => ["is not a number"]}
+    end
   end
 end
