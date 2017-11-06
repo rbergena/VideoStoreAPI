@@ -17,7 +17,16 @@ describe MoviesController do
       must_respond_with :success
 
       body = JSON.parse(response.body)
-      body.must_be empty?
+      body.must_be :empty?
+    end
+
+    it "returns the correct information" do
+      get movies_path
+      body = JSON.parse(response.body)
+
+      body.each do |movie|
+        movie.keys.sort.must_equal ["id", "release_date", "title"]
+      end
     end
   end
 end
