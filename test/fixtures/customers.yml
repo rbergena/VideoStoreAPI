@@ -4,7 +4,7 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+Shelley:
   name: Shelley Rocha
   registered_at: Wed, 29 Apr 2015 07:54:14 -0700
   address: Ap 292-5216 Ipsum Rd.
@@ -13,7 +13,13 @@ one:
   postal_code: 24309
   phone: (322) 510-8695
   account_credit: 13.15
-# column: value
-#
-# two: {}
-# column: value
+
+Roanna:
+  name: Roanna Robinson
+  registered_at: Fri, 28 Nov 2014 13:14:08 -0800
+  address: Ap 561-4214 Eget St.
+  city: Harrisburg
+  state: PA
+  postal_code: 15867
+  phone: (323) 336-1841
+  account_credit: 50.39
