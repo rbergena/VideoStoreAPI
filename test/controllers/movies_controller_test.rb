@@ -47,6 +47,13 @@ describe MoviesController do
       body = JSON.parse(response.body)
       body.must_equal "errors"=>{"id"=>["Movie with id 673001845 not found"]}
     end
+
+    it "returns the correct information" do
+      get movie_path(movies(:jaws).id)
+      body = JSON.parse(response.body)
+
+      body.keys.sort.must_equal ["available_inventory", "inventory", "overview", "release_date", "title"]
+    end
   end
 
   describe "create" do
