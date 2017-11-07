@@ -61,7 +61,7 @@ describe MoviesController do
 
     it "creates a movie" do
       proc {
-        post movies_path, params: {movie: movie_data}
+        post movies_path, params: movie_data
       }.must_change 'Movie.count', 1
       must_respond_with :success
     end
@@ -69,7 +69,7 @@ describe MoviesController do
     it "responds with bad_request if invalid data" do
       movie_data[:inventory] = nil
       proc {
-        post movies_path, params: {movie: movie_data}
+        post movies_path, params: movie_data
       }.wont_change 'Movie.count'
       must_respond_with :bad_request
 
