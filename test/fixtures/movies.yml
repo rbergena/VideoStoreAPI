@@ -9,9 +9,15 @@ psycho:
   overview: "When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower."
   release_date: "1960-06-16"
   inventory: 8
-  
+
 jaws:
   title: "The Exorcist"
   overview: "12-year-old Regan MacNeil begins to adapt an explicit new personality as strange events befall the local area of Georgetown. Her mother becomes torn between science and superstition in a desperate bid to save her daughter, and ultimately turns to her last hope: Father Damien Karras, a troubled priest who is struggling with his own faith."
   release_date: "1973-12-26"
   inventory: 7
+
+lambs:
+  title: "The Silence of the Lambs"
+  overview: "FBI trainee Clarice Starling ventures into a maximum-security asylum to pick the diseased brain of Hannibal Lecter, a psychiatrist turned homicidal cannibal. Starling needs clues to help her capture a serial killer. Unfortunately, her Faustian relationship with Lecter soon leads to his escape, and now two deranged killers are on the loose."
+  release_date: "1991-02-14"
+  inventory: 3

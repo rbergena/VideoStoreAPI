@@ -20,9 +20,17 @@ class Movie < ApplicationRecord
     current = []
     self.rentals.each do |rental|
       if rental.checkin_date == nil
-        current << rental
+        info = {
+          customer_id: rental.customer_id,
+          checkout_date: rental.checkout_date,
+          due_date: rental.due_date,
+          name: rental.customer.name,
+          postal_code: rental.customer.postal_code
+        }
+        current << info
       end
     end
+    return current
   end
 
 

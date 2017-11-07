@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
 
     if movie
       render(
-        json: movie.as_json(only: [:title, :overview, :release_date, :inventory, :available_inventory]),
+        json: movie.as_json(only: [:available_inventory, :title, :overview, :inventory, :release_date]),
         status: :ok
       )
     else
@@ -55,14 +55,10 @@ class MoviesController < ApplicationController
   def current
     movie = Movie.find_by(id: params[:id])
     current = movie.current
-    # customer_id
-    # name
-    # postal_code
-    # checkout_date
-    # due_date
+
     unless current.empty?
       render(
-        json: current.as_json(only: [:customer_id, :checkout_date, :due_date], include: :customer),
+        json: current,
         status: :ok
       )
     else

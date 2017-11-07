@@ -52,7 +52,13 @@ describe Movie do
         movie.available_inventory.must_equal 8
       end
     end
-
+    describe "current" do
+      it "returns an array with rentals" do
+        movie = movies(:psycho)
+        movie.current.must_be_kind_of Array
+        movie.current[0].must_be_kind_of Hash
+      end
+    end
   end
 
 end

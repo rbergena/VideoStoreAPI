@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :movies, only: [:index, :show, :create]
-  get '/movies/:id/current', to:'movies#current', as: 'current_movies'
+  get '/movies/:id/current', to:'movies#current', as: 'current_rentals'
   resources :customers, only: [:index]
 
   get '/rentals/overdue', to: 'rentals#overdue', as: "overdue"
