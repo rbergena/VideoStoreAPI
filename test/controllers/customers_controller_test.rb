@@ -23,7 +23,7 @@ describe CustomersController do
       get customers_path
 
       body = JSON.parse(response.body)
-      body.length.must_equal Customer.count+1
+      body.length.must_equal Customer.count
     end
 
     it "returns an empty array if there are no customers" do
