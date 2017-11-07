@@ -16,10 +16,10 @@ class Movie < ApplicationRecord
     self.update_columns(available_inventory: self.inventory) if available_inventory.nil?
   end
 
-  def current
-    current = []
+  def checked_out(status)
+    checked_out = []
     self.rentals.each do |rental|
-      if rental.checkin_date == nil
+      if (status == :current && rental.checkin_date == nil) || (status == :history && rental.checkin_date)
         info = {
           customer_id: rental.customer_id,
           checkout_date: rental.checkout_date,
@@ -27,10 +27,10 @@ class Movie < ApplicationRecord
           name: rental.customer.name,
           postal_code: rental.customer.postal_code
         }
-        current << info
+        checked_out << info
       end
     end
-    return current
+    return checked_out
   end
 
 

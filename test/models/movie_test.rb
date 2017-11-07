@@ -52,11 +52,20 @@ describe Movie do
         movie.available_inventory.must_equal 8
       end
     end
-    describe "current" do
+    
+    describe "checked_out" do
       it "returns an array with rentals" do
         movie = movies(:psycho)
-        movie.current.must_be_kind_of Array
-        movie.current[0].must_be_kind_of Hash
+        current = movie.checked_out(:current)
+        current.must_be_kind_of Array
+        current[0].must_be_kind_of Hash
+      end
+
+      it "returns an empty array if nothing status if there are no applicable rentals" do
+        movie = movies(:psycho)
+        current = movie.checked_out(:history)
+        current.must_be_kind_of Array
+        current.must_be :empty?
       end
     end
   end

@@ -53,22 +53,11 @@ class MoviesController < ApplicationController
   end
 
   def current
-    movie = Movie.find_by(id: params[:id])
-    current = movie.current
+    checked_out(:current)
+  end
 
-    unless current.empty?
-      render(
-        json: current,
-        status: :ok
-      )
-    else
-      render(
-        json: { errors: {
-          current: ["No movies checked out at this time."]}
-          },
-        status: :not_found
-      )
-    end
+  def history
+    checked_out(:history)
   end
 
 private
@@ -76,5 +65,23 @@ private
     params.permit(:title, :overview, :release_date, :inventory)
   end
 
+  def checked_out(status)
+    movie = Movie.find_by(id: params[:id])
+    checked_out = movie.checked_out(status)
+
+    unless checked_out.empty?
+      render(
+        json: checked_out,
+        status: :ok
+      )
+    else
+      render(
+        json: { errors: {
+          records: ["No records found."]}
+          },
+        status: :not_found
+      )
+    end
+  end
 
 end
