@@ -33,4 +33,26 @@ describe Movie do
     end
   end
 
+  describe "custom methods" do
+    describe "set_avail_inv_attribute" do
+      it "does what its supposed to" do
+        movie_params = {
+          title: "title",
+          overview: "this is an overview",
+          release_date: "some date",
+          inventory: 8,
+          available_inventory: nil,
+        }
+
+        movie = Movie.new(movie_params)
+        movie.must_be :valid?
+        movie.available_inventory.must_equal nil
+
+        movie.save
+        movie.available_inventory.must_equal 8
+      end
+    end
+
+  end
+
 end
