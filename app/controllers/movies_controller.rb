@@ -3,10 +3,19 @@ class MoviesController < ApplicationController
   def index
     movies = Movie.all
 
-    render(
-      json: movies.as_json(only: [:id, :title, :release_date]),
-      status: :ok
-    )
+    unless movies.empty?
+      render(
+        json: movies.as_json(only: [:id, :title, :release_date]),
+        status: :ok
+      )
+    else
+      render(
+        json: { errors: {
+          movies: ["No movies found."]}
+          },
+        status: :not_found
+      )
+    end
   end
 
   def show
@@ -19,7 +28,9 @@ class MoviesController < ApplicationController
       )
     else
       render(
-        json: { "not found" => true },
+        json: { errors: {
+          id: ["Movie with id #{params[:id]} not found"]}
+          },
         status: :not_found
       )
     end
