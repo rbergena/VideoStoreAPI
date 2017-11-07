@@ -52,6 +52,29 @@ class MoviesController < ApplicationController
     end
   end
 
+  def current
+    movie = Movie.find_by(id: params[:id])
+    current = movie.current
+    # customer_id
+    # name
+    # postal_code
+    # checkout_date
+    # due_date
+    unless current.empty?
+      render(
+        json: current.as_json(only: [:customer_id, :checkout_date, :due_date], include: :customer),
+        status: :ok
+      )
+    else
+      render(
+        json: { errors: {
+          current: ["No movies checked out at this time."]}
+          },
+        status: :not_found
+      )
+    end
+  end
+
 private
   def movie_params
     params.permit(:title, :overview, :release_date, :inventory)
