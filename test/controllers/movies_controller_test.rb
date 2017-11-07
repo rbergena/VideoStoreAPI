@@ -14,10 +14,10 @@ describe MoviesController do
     it  "returns an empty array when no Movies" do
       Movie.destroy_all
       get movies_path
-      must_respond_with :success
+      must_respond_with :not_found
 
       body = JSON.parse(response.body)
-      body.must_be :empty?
+      body["errors"].must_include "movies"
     end
 
     it "returns the correct information" do
@@ -45,7 +45,7 @@ describe MoviesController do
       must_respond_with :not_found
 
       body = JSON.parse(response.body)
-      body.must_equal "not found" => true
+      body.must_equal "errors"=>{"id"=>["Movie with id 673001845 not found"]}
     end
   end
 
@@ -61,7 +61,7 @@ describe MoviesController do
 
     it "creates a movie" do
       proc {
-        post movies_path, params: {movie: movie_data}
+        post movies_path, params: movie_data
       }.must_change 'Movie.count', 1
       must_respond_with :success
     end
@@ -69,7 +69,7 @@ describe MoviesController do
     it "responds with bad_request if invalid data" do
       movie_data[:inventory] = nil
       proc {
-        post movies_path, params: {movie: movie_data}
+        post movies_path, params: movie_data
       }.wont_change 'Movie.count'
       must_respond_with :bad_request
 
