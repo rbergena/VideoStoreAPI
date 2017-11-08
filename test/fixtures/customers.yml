@@ -23,3 +23,13 @@ Roanna:
   postal_code: 15867
   phone: (323) 336-1841
   account_credit: 50.39
+
+Curran:
+  name: Curran Stout
+  registered_at: Wed, 16 Apr 2014 21:40:20 -0700
+  address: 123 S 23rd St.
+  city: Seattle
+  state: WA
+  postal_code: 94267
+  phone: (908) 949-6758
+  movies_checked_out_count: 0
