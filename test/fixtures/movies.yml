@@ -9,12 +9,15 @@ psycho:
   overview: "When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine… until Marion decides to take a shower."
   release_date: "1960-06-16"
   inventory: 8
+  available_inventory: 8
+
 
 jaws:
   title: "Jaws"
   overview: "12-year-old Regan MacNeil begins to adapt an explicit new personality as strange events befall the local area of Georgetown. Her mother becomes torn between science and superstition in a desperate bid to save her daughter, and ultimately turns to her last hope: Father Damien Karras, a troubled priest who is struggling with his own faith."
   release_date: "1973-12-26"
   inventory: 7
+  available_inventory: 7
 
 lambs:
   title: "The Silence of the Lambs"
