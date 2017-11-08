@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
     else
       render(
         json: { errors: {
-          movies: ["No movies found."]}
+          customers: ["No movies found."]}
           },
         status: :not_found
       )
