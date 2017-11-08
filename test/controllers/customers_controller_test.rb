@@ -26,16 +26,16 @@ describe CustomersController do
       body.length.must_equal Customer.count
     end
 
-    it "returns an empty array if there are no customers" do
+    it "responds with not found if there are no customers" do
       Customer.destroy_all
 
       get customers_path
+      must_respond_with :not_found
 
-      must_respond_with :success
       body = JSON.parse(response.body)
-      body.must_be_kind_of Array
+      body.must_be_kind_of Hash
 
-      body.must_be :empty?
+      body["errors"].must_include "customers"
 
     end
   end
