@@ -57,4 +57,21 @@ describe Customer do
     end
   end
 
+
+  describe "checked_out" do
+    it "returns an array with rentals" do
+      customer = customers(:Shelley)
+      current = customer.checked_out(:current)
+      current.must_be_kind_of Array
+      current[0].must_be_kind_of Hash
+    end
+
+    it "returns an empty array if nothing status if there are no applicable rentals" do
+      customer = customers(:Roanna)
+      current = customer.checked_out(:history)
+      current.must_be_kind_of Array
+      current.must_be :empty?
+    end
+  end
+
 end

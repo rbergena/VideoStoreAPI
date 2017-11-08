@@ -47,6 +47,13 @@ describe MoviesController do
       body = JSON.parse(response.body)
       body.must_equal "errors"=>{"id"=>["Movie with id 673001845 not found"]}
     end
+
+    it "returns the correct information" do
+      get movie_path(movies(:jaws).id)
+      body = JSON.parse(response.body)
+
+      body.keys.sort.must_equal ["available_inventory", "inventory", "overview", "release_date", "title"]
+    end
   end
 
   describe "create" do
@@ -75,6 +82,58 @@ describe MoviesController do
 
       body = JSON.parse(response.body)
       body.must_equal "errors" => {"inventory" => ["is not a number"]}
+    end
+  end
+
+  describe "current" do
+    it "returns an array of current rentals for one movie" do
+      get current_rentals_movie_path(movies(:jaws).id)
+      must_respond_with :success
+
+      body = JSON.parse(response.body)
+      body.must_be_kind_of Array
+      body[0]["customer_id"].must_equal rentals(:rental_two).customer_id
+    end
+
+    it "returns not_found when no rentals exist" do
+      get current_rentals_movie_path(movies(:lambs).id)
+      must_respond_with :not_found
+
+      body = JSON.parse(response.body)
+      body.must_equal "errors"=>{"records"=>["No records found."]}
+    end
+
+    it "returns the correct information" do
+      get current_rentals_movie_path(movies(:jaws).id)
+      body = JSON.parse(response.body)
+
+      body[0].keys.sort.must_equal ["checkout_date", "customer_id", "due_date", "name", "postal_code"]
+    end
+  end
+
+  describe "history" do
+    it "returns an array of historic rentals for one movie" do
+      get historic_rentals_movie_path(movies(:jaws).id)
+      must_respond_with :success
+
+      body = JSON.parse(response.body)
+      body.must_be_kind_of Array
+      body[0]["customer_id"].must_equal rentals(:rental_three).customer_id
+    end
+
+    it "returns not_found when movie doesn't exist" do
+      get historic_rentals_movie_path(movies(:lambs).id)
+      must_respond_with :not_found
+
+      body = JSON.parse(response.body)
+      body.must_equal "errors"=>{"records"=>["No records found."]}
+    end
+
+    it "returns the correct information" do
+      get historic_rentals_movie_path(movies(:jaws).id)
+      body = JSON.parse(response.body)
+
+      body[0].keys.sort.must_equal ["checkout_date", "customer_id", "due_date", "name", "postal_code"]
     end
   end
 end

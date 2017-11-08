@@ -21,3 +21,10 @@ rental_two:
   movie: jaws
   due_date: 2017-12-22
   checkout_date: 2017-11-07
+
+rental_three:
+  customer: Shelley
+  movie: jaws
+  due_date: 2017-12-22
+  checkout_date: 2017-11-07
+  checkin_date: 2017-12-07
